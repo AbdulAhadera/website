@@ -1,0 +1,484 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-bg-1: #ffffff;
+  --color-bg-2: #f8faff;
+  --color-bg-3: #f1f6ff;
+  --color-bg-dark: #07111f;
+  --color-surface: #ffffff;
+
+  --color-border-light: #edf2fb;
+  --color-border-strong: #dbe6f7;
+
+  --color-text-primary: #07111f;
+  --color-text-secondary: #334155;
+  --color-text-body: #1e293b;
+  --color-text-subtle: #64748b;
+  --color-text-muted: #94a3b8;
+  --color-text-inverse: #ffffff;
+
+  --color-accent: #0066ff;
+  --color-accent-hover: #0052cc;
+  --color-accent-active: #003fa6;
+  --color-accent-soft: #eaf2ff;
+  --color-accent-soft-hover: #dce9ff;
+  --color-accent-contrast: #ffffff;
+  --color-electric: #2f80ff;
+
+  --color-navy: #07111f;
+  --color-navy-light: #101d30;
+  --color-navy-soft: #17263c;
+
+  --color-green: #10b981;
+  --color-green-hover: #059669;
+  --color-green-soft: #ecfdf5;
+  --color-green-strong: #047857;
+
+  --color-purple: #7c3aed;
+  --color-purple-hover: #6d28d9;
+  --color-purple-soft: #f3e8ff;
+  --color-purple-strong: #5b21b6;
+
+  --color-orange: #f97316;
+  --color-orange-hover: #ea580c;
+  --color-orange-soft: #fff3e8;
+  --color-orange-strong: #c2410c;
+
+  --color-pink: #ec4899;
+  --color-pink-hover: #db2777;
+  --color-pink-soft: #fdf2f8;
+  --color-pink-strong: #be185d;
+
+  --color-yellow: #f4b400;
+  --color-yellow-hover: #d99b00;
+  --color-yellow-soft: #fff8db;
+  --color-yellow-strong: #a16207;
+
+  --color-cyan: #06b6d4;
+  --color-cyan-hover: #0891b2;
+  --color-cyan-soft: #ecfeff;
+  --color-cyan-strong: #0e7490;
+
+  --color-red: #ef4444;
+  --color-red-hover: #dc2626;
+  --color-red-soft: #fef2f2;
+  --color-red-strong: #b91c1c;
+
+  --font-sans: "Manrope", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font-sans);
+  color: var(--color-text-body);
+  background: var(--color-bg-1);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-contrast);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+img,
+video,
+svg {
+  max-width: 100%;
+  display: block;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  font: inherit;
+  transition:
+    color 200ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease,
+    opacity 200ms ease,
+    box-shadow 200ms ease,
+    transform 200ms ease;
+}
+
+button,
+a {
+  cursor: pointer;
+}
+
+.parallax-layer {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.parallax-slow {
+  will-change: transform;
+}
+
+.parallax-medium {
+  will-change: transform;
+}
+
+.parallax-fast {
+  will-change: transform;
+}
+
+.text-gradient {
+  background: linear-gradient(
+    90deg,
+    var(--color-accent),
+    var(--color-purple),
+    var(--color-pink)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.bg-accent-soft {
+  background: var(--color-accent-soft);
+}
+
+.bg-purple-soft {
+  background: var(--color-purple-soft);
+}
+
+.bg-green-soft {
+  background: var(--color-green-soft);
+}
+
+.bg-orange-soft {
+  background: var(--color-orange-soft);
+}
+
+.bg-pink-soft {
+  background: var(--color-pink-soft);
+}
+
+.bg-yellow-soft {
+  background: var(--color-yellow-soft);
+}
+
+.bg-cyan-soft {
+  background: var(--color-cyan-soft);
+}
+
+.bg-red-soft {
+  background: var(--color-red-soft);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-purple {
+  color: var(--color-purple);
+}
+
+.text-green {
+  color: var(--color-green);
+}
+
+.text-orange {
+  color: var(--color-orange);
+}
+
+.text-pink {
+  color: var(--color-pink);
+}
+
+.text-yellow {
+  color: var(--color-yellow);
+}
+
+.text-cyan {
+  color: var(--color-cyan);
+}
+
+.text-red {
+  color: var(--color-red);
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 22s linear infinite;
+}
+
+@keyframes deliverableNumber {
+  0% {
+    opacity: 0;
+    transform: translateY(-25px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes deliverableTitle {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes deliverableCopy {
+  0% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes deliverableSignal {
+  0% {
+    left: 0%;
+    opacity: 0;
+  }
+
+  10% {
+    opacity: 1;
+  }
+
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    left: calc(100% - 12px);
+    opacity: 0;
+  }
+}
+
+@keyframes deliverableOrbit {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes deliverableOrbitDot {
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+  }
+
+  50% {
+    transform: translateX(-50%) scale(1.6);
+  }
+}
+
+@keyframes deliverablesMarquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.deliverable-number {
+  animation: deliverableNumber 700ms ease both;
+}
+
+.deliverable-title {
+  animation: deliverableTitle 650ms ease both;
+}
+
+.deliverable-copy {
+  animation: deliverableCopy 700ms ease both;
+}
+
+.deliverable-signal {
+  animation: deliverableSignal 4s linear infinite;
+}
+
+.deliverable-orbit {
+  animation: deliverableOrbit 14s linear infinite;
+}
+
+.deliverable-orbit-dot {
+  animation: deliverableOrbitDot 2.4s ease-in-out infinite;
+}
+
+.deliverables-marquee {
+  animation: deliverablesMarquee 28s linear infinite;
+}
+
+@keyframes homeHeroImage {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.025);
+  }
+}
+
+.home-hero-image {
+  animation: homeHeroImage 16s ease-in-out infinite;
+}
+
+.color-eggs {
+  position: relative;
+  display: flex;
+  min-height: 76px;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 22px;
+  overflow: hidden;
+  padding-top: 18px;
+}
+
+.color-eggs__line {
+  position: absolute;
+  bottom: 14px;
+  left: 20%;
+  right: 20%;
+  height: 1px;
+  background: var(--color-border-strong);
+}
+
+.color-eggs__egg {
+  position: relative;
+  z-index: 1;
+  width: 28px;
+  height: 38px;
+  border-radius: 52% 48% 46% 54% / 58% 58% 42% 42%;
+  animation: colorEggRise 3.8s ease-in-out infinite;
+}
+
+.color-eggs__egg--blue {
+  background: var(--color-accent);
+  animation-delay: -0.8s;
+}
+
+.color-eggs__egg--purple {
+  background: var(--color-purple);
+  animation-delay: -1.9s;
+}
+
+.color-eggs__egg--green {
+  background: var(--color-green);
+  animation-delay: -2.7s;
+}
+
+.color-eggs__egg--orange {
+  background: var(--color-orange);
+  animation-delay: -1.2s;
+}
+
+.color-eggs__egg--pink {
+  background: var(--color-pink);
+  animation-delay: -2.2s;
+}
+
+.color-eggs__label {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--color-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+@keyframes colorEggRise {
+  0%,
+  100% {
+    transform: translateY(10px) rotate(-5deg);
+    opacity: 0.72;
+  }
+
+  50% {
+    transform: translateY(-8px) rotate(5deg);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .parallax-layer,
+  .parallax-slow,
+  .parallax-medium,
+  .parallax-fast {
+    transform: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-marquee,
+  .deliverable-number,
+  .deliverable-title,
+  .deliverable-copy,
+  .deliverable-signal,
+  .deliverable-orbit,
+  .deliverable-orbit-dot,
+  .deliverables-marquee,
+  .home-hero-image,
+  .color-eggs__egg {
+    animation: none !important;
+  }
+
+  .parallax-layer,
+  .parallax-slow,
+  .parallax-medium,
+  .parallax-fast {
+    transform: none !important;
+  }
+}
