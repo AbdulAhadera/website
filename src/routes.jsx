@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 
-// import { HomePage } from "./pages/HomePage.jsx";
+import { HomePage } from "./pages/HomePage.jsx";
 // import { ServicesPage } from "./pages/ServicesPage.jsx";
 // import { ServiceDetailPage } from "./pages/services/ServiceDetailPage.jsx";
 
@@ -18,7 +18,7 @@ import { Routes, Route } from "react-router-dom";
 const Router = () => {
   return (
     <Routes>
-      {/* <Route path="/" element={<HomePage />} /> */}
+      <Route path="/" element={<HomePage />} />
 
       {/* <Route path="/services" element={<ServicesPage />} />
       <Route
