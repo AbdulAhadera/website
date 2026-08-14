@@ -1,4 +1,4 @@
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 
 import { Router } from "./routes.jsx";
 
@@ -7,7 +7,7 @@ import { Footer } from "./components/layout/Footer.jsx";
 
 const App = () => {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className="min-h-screen">
         <Navbar />
 
@@ -17,7 +17,7 @@ const App = () => {
 
         <Footer />
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
