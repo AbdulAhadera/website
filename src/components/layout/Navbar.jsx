@@ -25,12 +25,18 @@ const Navbar = () => {
     setActiveMenu(menu);
   };
 
-  const handleCloseMenu = () => {
+  const handleTriggerLeave = () => {
     clearTimeout(closeTimerRef.current);
 
     closeTimerRef.current = setTimeout(() => {
       setActiveMenu(null);
-    }, 100);
+    }, 80);
+  };
+
+  const handleDropdownLeave = () => {
+    clearTimeout(closeTimerRef.current);
+
+    setActiveMenu(null);
   };
 
   const handleCloseAll = () => {
@@ -44,6 +50,7 @@ const Navbar = () => {
     clearTimeout(closeTimerRef.current);
 
     setActiveMenu(null);
+
     setMobileOpen((current) => !current);
   };
 
@@ -51,10 +58,6 @@ const Navbar = () => {
     return location.pathname.startsWith(path);
   };
 
-  /*
-   * This effect is valid because it synchronizes React state
-   * with an external browser API (document.body).
-   */
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
 
@@ -63,10 +66,6 @@ const Navbar = () => {
     };
   }, [mobileOpen]);
 
-  /*
-   * Only cleanup.
-   * No setState inside the effect.
-   */
   useEffect(() => {
     return () => {
       clearTimeout(closeTimerRef.current);
@@ -75,19 +74,27 @@ const Navbar = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-[100] border-b border-black/[0.06] bg-white/95 backdrop-blur-xl">
+      {/* NAVBAR */}
+      <header className="sticky top-0 z-[100] border-b border-border-light bg-surface/95 backdrop-blur-xl">
         <div className="mx-auto flex h-[72px] w-full max-w-[1500px] items-center px-5 md:px-7 lg:px-8">
           {/* LOGO */}
           <Link
             to="/"
             onClick={handleCloseAll}
-            className="flex shrink-0 items-center"
+            className="flex shrink-0 items-center gap-1"
           >
             <img
               src={Icon}
-              alt="Zapmind"
+              alt="Zapmind AI"
               className="h-[34px] w-auto object-contain"
             />
+
+            <span className="text-[20px] font-bold tracking-[-0.045em] text-text-primary sm:text-[21px]">
+              apmind
+              <span className="ml-1 font-medium text-accent">
+                AI
+              </span>
+            </span>
           </Link>
 
           {/* DESKTOP NAVIGATION */}
@@ -96,14 +103,15 @@ const Navbar = () => {
             <div
               className="flex h-full items-center"
               onMouseEnter={() => handleOpenMenu("services")}
-              onMouseLeave={handleCloseMenu}
+              onMouseLeave={handleTriggerLeave}
             >
               <button
                 type="button"
+                aria-expanded={activeMenu === "services"}
                 className={`group relative flex h-full items-center gap-1.5 px-5 text-[14px] font-semibold transition-colors duration-100 ${
                   activeMenu === "services" || isActive("/services")
-                    ? "text-primary-blue"
-                    : "text-text-primary hover:text-primary-blue"
+                    ? "text-accent"
+                    : "text-text-primary hover:text-accent"
                 }`}
               >
                 Services
@@ -117,34 +125,28 @@ const Navbar = () => {
                 />
 
                 <span
-                  className={`absolute bottom-0 left-5 right-5 h-[2px] origin-center bg-primary-blue transition-transform duration-100 ${
+                  className={`absolute bottom-0 left-5 right-5 h-[2px] origin-center bg-accent transition-transform duration-100 ${
                     activeMenu === "services"
                       ? "scale-x-100"
                       : "scale-x-0"
                   }`}
                 />
               </button>
-
-              <ServicesMenu
-                open={activeMenu === "services"}
-                onMouseEnter={() => handleOpenMenu("services")}
-                onMouseLeave={handleCloseMenu}
-                onNavigate={handleCloseAll}
-              />
             </div>
 
             {/* INDUSTRIES */}
             <div
               className="flex h-full items-center"
               onMouseEnter={() => handleOpenMenu("industries")}
-              onMouseLeave={handleCloseMenu}
+              onMouseLeave={handleTriggerLeave}
             >
               <button
                 type="button"
+                aria-expanded={activeMenu === "industries"}
                 className={`group relative flex h-full items-center gap-1.5 px-5 text-[14px] font-semibold transition-colors duration-100 ${
                   activeMenu === "industries" || isActive("/industries")
-                    ? "text-primary-blue"
-                    : "text-text-primary hover:text-primary-blue"
+                    ? "text-accent"
+                    : "text-text-primary hover:text-accent"
                 }`}
               >
                 Industries
@@ -158,30 +160,23 @@ const Navbar = () => {
                 />
 
                 <span
-                  className={`absolute bottom-0 left-5 right-5 h-[2px] origin-center bg-primary-blue transition-transform duration-100 ${
+                  className={`absolute bottom-0 left-5 right-5 h-[2px] origin-center bg-accent transition-transform duration-100 ${
                     activeMenu === "industries"
                       ? "scale-x-100"
                       : "scale-x-0"
                   }`}
                 />
               </button>
-
-              <IndustriesMenu
-                open={activeMenu === "industries"}
-                onMouseEnter={() => handleOpenMenu("industries")}
-                onMouseLeave={handleCloseMenu}
-                onNavigate={handleCloseAll}
-              />
             </div>
 
             {/* WORK */}
             <Link
               to="/work"
               onClick={handleCloseAll}
-              className={`relative flex h-full items-center px-5 text-[14px] font-semibold transition-colors duration-100 ${
+              className={`flex h-full items-center px-5 text-[14px] font-semibold transition-colors duration-100 ${
                 isActive("/work")
-                  ? "text-primary-blue"
-                  : "text-text-primary hover:text-primary-blue"
+                  ? "text-accent"
+                  : "text-text-primary hover:text-accent"
               }`}
             >
               Work
@@ -191,10 +186,10 @@ const Navbar = () => {
             <Link
               to="/about"
               onClick={handleCloseAll}
-              className={`relative flex h-full items-center px-5 text-[14px] font-semibold transition-colors duration-100 ${
+              className={`flex h-full items-center px-5 text-[14px] font-semibold transition-colors duration-100 ${
                 isActive("/about")
-                  ? "text-primary-blue"
-                  : "text-text-primary hover:text-primary-blue"
+                  ? "text-accent"
+                  : "text-text-primary hover:text-accent"
               }`}
             >
               About
@@ -204,10 +199,10 @@ const Navbar = () => {
             <Link
               to="/insights"
               onClick={handleCloseAll}
-              className={`relative flex h-full items-center px-5 text-[14px] font-semibold transition-colors duration-100 ${
+              className={`flex h-full items-center px-5 text-[14px] font-semibold transition-colors duration-100 ${
                 isActive("/insights")
-                  ? "text-primary-blue"
-                  : "text-text-primary hover:text-primary-blue"
+                  ? "text-accent"
+                  : "text-text-primary hover:text-accent"
               }`}
             >
               Insights
@@ -216,10 +211,10 @@ const Navbar = () => {
 
           {/* DESKTOP CTA */}
           <div className="ml-auto hidden xl:block">
-           <Button />
+            <Button />
           </div>
 
-          {/* MOBILE TOGGLE */}
+          {/* MOBILE BUTTON */}
           <button
             type="button"
             onClick={handleMobileToggle}
@@ -233,7 +228,9 @@ const Navbar = () => {
           >
             <span
               className={`transition-transform duration-150 ${
-                mobileOpen ? "rotate-90" : "rotate-0"
+                mobileOpen
+                  ? "rotate-90"
+                  : "rotate-0"
               }`}
             >
               {mobileOpen ? (
@@ -246,16 +243,32 @@ const Navbar = () => {
         </div>
       </header>
 
-      {/* DESKTOP BACKDROP */}
+      {/* BACKDROP */}
       <div
-        className={`pointer-events-none fixed inset-0 top-[72px] z-[60] hidden bg-[#07111f]/5 backdrop-blur-[1px] transition-opacity duration-100 xl:block ${
+        className={`pointer-events-none fixed inset-0 top-[72px] z-[60] hidden bg-bg-dark/5 backdrop-blur-[1px] transition-opacity duration-100 xl:block ${
           activeMenu
             ? "opacity-100"
             : "opacity-0"
         }`}
       />
 
-      {/* MOBILE MENU */}
+      {/* SERVICES MENU */}
+      <ServicesMenu
+        open={activeMenu === "services"}
+        onMouseEnter={() => handleOpenMenu("services")}
+        onMouseLeave={handleDropdownLeave}
+        onNavigate={handleCloseAll}
+      />
+
+      {/* INDUSTRIES MENU */}
+      <IndustriesMenu
+        open={activeMenu === "industries"}
+        onMouseEnter={() => handleOpenMenu("industries")}
+        onMouseLeave={handleDropdownLeave}
+        onNavigate={handleCloseAll}
+      />
+
+      {/* MOBILE */}
       <MobileMenu
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}

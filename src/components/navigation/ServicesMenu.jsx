@@ -12,9 +12,9 @@ const services = [
     description:
       "Websites built to communicate clearly, feel premium, and convert attention into action.",
     href: "/services/website-design-development",
-
-    accent: "#0066FF",
-    soft: "#EEF5FF",
+    accentClass: "bg-accent",
+    textClass: "text-accent",
+    softClass: "bg-accent-soft",
   },
   {
     id: "branding-creative-design",
@@ -23,9 +23,9 @@ const services = [
     description:
       "Identity, visual systems, and creative direction that make your brand recognizable.",
     href: "/services/branding-creative-design",
-
-    accent: "#7C3AED",
-    soft: "#F5F0FF",
+    accentClass: "bg-purple",
+    textClass: "text-purple",
+    softClass: "bg-purple-soft",
   },
   {
     id: "digital-marketing-growth",
@@ -34,9 +34,9 @@ const services = [
     description:
       "SEO, campaigns, content, and acquisition systems designed to generate demand.",
     href: "/services/digital-marketing-growth",
-
-    accent: "#16A34A",
-    soft: "#EFFBF3",
+    accentClass: "bg-green",
+    textClass: "text-green",
+    softClass: "bg-green-soft",
   },
   {
     id: "social-media-management",
@@ -45,9 +45,9 @@ const services = [
     description:
       "Strategy and content that keep your brand visible, relevant, and worth following.",
     href: "/services/social-media-management",
-
-    accent: "#EC4899",
-    soft: "#FFF1F7",
+    accentClass: "bg-pink",
+    textClass: "text-pink",
+    softClass: "bg-pink-soft",
   },
   {
     id: "ecommerce-solutions",
@@ -56,9 +56,9 @@ const services = [
     description:
       "Stores and digital buying experiences built around smoother conversion and growth.",
     href: "/services/ecommerce-solutions",
-
-    accent: "#F97316",
-    soft: "#FFF5EC",
+    accentClass: "bg-orange",
+    textClass: "text-orange",
+    softClass: "bg-orange-soft",
   },
   {
     id: "software-app-development",
@@ -67,9 +67,9 @@ const services = [
     description:
       "Custom apps, portals, dashboards, and platforms shaped around your workflows.",
     href: "/services/software-app-development",
-
-    accent: "#0891B2",
-    soft: "#ECFBFF",
+    accentClass: "bg-cyan",
+    textClass: "text-cyan",
+    softClass: "bg-cyan-soft",
   },
 ];
 
@@ -83,21 +83,27 @@ const ServicesMenu = ({
     <div
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      className={`fixed inset-x-0 top-[72px] z-[80] px-4 pt-2 transition-all duration-100 ease-out ${
+      className={`fixed left-1/2 top-[72px] z-[80] hidden w-[min(1000px,calc(100vw-32px))] -translate-x-1/2 pt-2 transition-[opacity,visibility] duration-100 ease-out xl:block ${
         open
-          ? "visible translate-y-0 opacity-100"
-          : "invisible -translate-y-[4px] opacity-0"
+          ? "visible pointer-events-auto opacity-100"
+          : "invisible pointer-events-none opacity-0"
       }`}
     >
-      <div className="mx-auto w-[min(1000px,calc(100vw-32px))] overflow-hidden border border-black/[0.07] bg-white shadow-[0_18px_50px_rgba(7,17,31,0.14)]">
-        {/* TOP */}
-        <div className="flex h-[54px] items-center justify-between border-b border-black/[0.07] px-6">
+      <div
+        className={`overflow-hidden border border-border-light bg-surface shadow-2xl transition-transform duration-100 ease-out ${
+          open
+            ? "translate-y-0"
+            : "-translate-y-1"
+        }`}
+      >
+        {/* HEADER */}
+        <div className="flex h-[54px] items-center justify-between border-b border-border-light px-6">
           <div className="flex items-center gap-3">
             <div className="flex items-center">
-              <span className="h-[7px] w-[7px] bg-[#0066FF]" />
-              <span className="h-[7px] w-[7px] bg-[#7C3AED]" />
-              <span className="h-[7px] w-[7px] bg-[#16A34A]" />
-              <span className="h-[7px] w-[7px] bg-[#F97316]" />
+              <span className="h-[7px] w-[7px] bg-accent" />
+              <span className="h-[7px] w-[7px] bg-purple" />
+              <span className="h-[7px] w-[7px] bg-green" />
+              <span className="h-[7px] w-[7px] bg-orange" />
             </div>
 
             <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-text-muted">
@@ -108,7 +114,7 @@ const ServicesMenu = ({
           <Link
             to="/services"
             onClick={onNavigate}
-            className="group flex items-center gap-2 text-[12px] font-semibold text-text-primary transition-colors duration-100 hover:text-primary-blue"
+            className="group flex items-center gap-2 text-[12px] font-semibold text-text-primary transition-colors duration-100 hover:text-accent"
           >
             Explore all services
 
@@ -118,7 +124,7 @@ const ServicesMenu = ({
 
         {/* CONTENT */}
         <div className="grid grid-cols-[1fr_310px]">
-          {/* SERVICE GRID */}
+          {/* SERVICES */}
           <div className="grid grid-cols-2">
             {services.map((service, index) => (
               <ServiceItem
@@ -131,116 +137,108 @@ const ServicesMenu = ({
             ))}
           </div>
 
-          {/* AI */}
+          {/* AI FEATURE */}
           <Link
             to="/services/ai-automation-solutions"
             onClick={onNavigate}
-            style={{
-              transitionDelay: open ? "80ms" : "0ms",
-            }}
-            className={`group relative flex min-h-[342px] flex-col justify-between overflow-hidden border-l border-black/[0.07] bg-[#101828] p-7 transition-all duration-100 ${
+            className={`group relative flex min-h-[342px] flex-col justify-between overflow-hidden border-l border-border-light bg-navy-light p-7 transition-[opacity,transform] duration-100 ${
               open
                 ? "translate-y-0 opacity-100"
                 : "translate-y-[3px] opacity-0"
             }`}
           >
-            {/* MULTICOLOR BACKGROUND DETAILS */}
-            <div className="absolute -right-12 -top-12 h-36 w-36 bg-[#7C3AED]/30 blur-[50px]" />
+            {/* GLOWS */}
+            <div className="pointer-events-none absolute -right-12 -top-12 h-36 w-36 bg-purple/30 blur-[50px]" />
 
-            <div className="absolute -bottom-10 left-4 h-32 w-32 bg-[#0066FF]/25 blur-[45px]" />
+            <div className="pointer-events-none absolute -bottom-10 left-4 h-32 w-32 bg-accent/25 blur-[45px]" />
 
-            <div className="absolute bottom-20 right-0 h-24 w-24 bg-[#06B6D4]/20 blur-[40px]" />
+            <div className="pointer-events-none absolute bottom-20 right-0 h-24 w-24 bg-cyan/20 blur-[40px]" />
 
-            <div className="absolute inset-0 opacity-[0.055] [background-image:linear-gradient(rgba(255,255,255,.6)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.6)_1px,transparent_1px)] [background-size:28px_28px]" />
+            {/* GRID */}
+            <div className="grid-dark-small pointer-events-none absolute inset-0 opacity-70" />
 
             {/* TOP */}
             <div className="relative flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <span className="relative flex h-[8px] w-[8px]">
-                  <span className="absolute inset-0 animate-ping bg-[#A855F7]/40" />
-                  <span className="relative h-[8px] w-[8px] bg-[#A855F7]" />
+                  <span className="absolute inset-0 animate-ping bg-purple/40" />
+                  <span className="relative h-[8px] w-[8px] bg-purple" />
                 </span>
 
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-text-inverse/55">
                   Zapmind AI
                 </span>
               </div>
 
-              <span className="text-[10px] text-white/25">
+              <span className="text-[10px] text-text-inverse/25">
                 07
               </span>
             </div>
 
-            {/* SMALL VISUAL */}
+            {/* AI FLOW VISUAL */}
             <div className="relative my-5 h-[88px]">
-              <div className="absolute left-0 top-[18px] h-[1px] w-[38%] bg-[#A855F7]/50" />
+              <div className="absolute left-0 top-[18px] h-px w-[38%] bg-purple/50" />
 
-              <div className="absolute left-[38%] top-[18px] h-[35px] w-[1px] bg-white/15" />
+              <div className="absolute left-[38%] top-[18px] h-[35px] w-px bg-text-inverse/15" />
 
-              <div className="absolute left-[38%] top-[52px] h-[1px] w-[30%] bg-[#06B6D4]/50" />
+              <div className="absolute left-[38%] top-[52px] h-px w-[30%] bg-cyan/50" />
 
-              <div className="absolute left-[68%] top-[52px] h-[26px] w-[1px] bg-white/15" />
+              <div className="absolute left-[68%] top-[52px] h-[26px] w-px bg-text-inverse/15" />
 
-              <div className="absolute left-[68%] top-[77px] h-[1px] w-[22%] bg-[#22C55E]/60" />
+              <div className="absolute left-[68%] top-[77px] h-px w-[22%] bg-green/60" />
 
-              <span className="absolute left-0 top-[14px] h-[9px] w-[9px] bg-[#A855F7]" />
+              <span className="absolute left-0 top-[14px] h-[9px] w-[9px] bg-purple" />
 
-              <span className="absolute left-[36.5%] top-[48px] h-[9px] w-[9px] bg-[#06B6D4]" />
+              <span className="absolute left-[36.5%] top-[48px] h-[9px] w-[9px] bg-cyan" />
 
-              <span className="absolute left-[66.5%] top-[73px] h-[9px] w-[9px] bg-[#22C55E]" />
+              <span className="absolute left-[66.5%] top-[73px] h-[9px] w-[9px] bg-green" />
             </div>
 
             {/* TEXT */}
             <div className="relative">
-              <span className="text-[10px] font-semibold uppercase tracking-[0.17em] text-[#A855F7]">
+              <span className="text-[10px] font-semibold uppercase tracking-[0.17em] text-purple">
                 AI & Automation
               </span>
 
-              <h3 className="mt-3 max-w-[240px] text-[28px] font-semibold leading-[1.02] tracking-[-0.045em] text-white">
+              <h3 className="mt-3 max-w-[240px] text-[28px] font-semibold leading-[1.02] tracking-[-0.045em] text-text-inverse">
                 AI that takes work off your team.
               </h3>
 
-              <p className="mt-4 max-w-[250px] text-[12px] leading-[1.65] text-white/55">
-                Assistants, receptionists, support, lead handling, and workflow automation.
+              <p className="mt-4 max-w-[250px] text-[12px] leading-[1.65] text-text-inverse/55">
+                Assistants, receptionists, support, lead handling, and workflow
+                automation.
               </p>
 
-              <div className="mt-5 flex items-center gap-2 text-[12px] font-semibold text-white">
+              <div className="mt-5 flex items-center gap-2 text-[12px] font-semibold text-text-inverse">
                 Explore AI
 
                 <FiArrowUpRight className="transition-transform duration-100 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
               </div>
             </div>
-
-            <div className="absolute bottom-0 left-0 flex h-[3px] w-full">
-              <span className="h-full flex-1 bg-[#7C3AED]" />
-              <span className="h-full flex-1 bg-[#0066FF]" />
-              <span className="h-full flex-1 bg-[#06B6D4]" />
-              <span className="h-full flex-1 bg-[#22C55E]" />
-            </div>
           </Link>
         </div>
 
-        {/* BOTTOM */}
-        <div className="flex h-[48px] items-center justify-between border-t border-black/[0.07] px-6">
+        {/* FOOTER */}
+        <div className="flex h-[48px] items-center justify-between border-t border-border-light px-6">
           <div className="flex items-center gap-3">
             <span className="text-[11px] text-text-muted">
               One team across
             </span>
 
             <div className="flex gap-1">
-              <span className="h-[5px] w-5 bg-[#0066FF]" />
-              <span className="h-[5px] w-5 bg-[#7C3AED]" />
-              <span className="h-[5px] w-5 bg-[#16A34A]" />
-              <span className="h-[5px] w-5 bg-[#EC4899]" />
-              <span className="h-[5px] w-5 bg-[#F97316]" />
-              <span className="h-[5px] w-5 bg-[#0891B2]" />
+              <span className="h-[5px] w-5 bg-accent" />
+              <span className="h-[5px] w-5 bg-purple" />
+              <span className="h-[5px] w-5 bg-green" />
+              <span className="h-[5px] w-5 bg-pink" />
+              <span className="h-[5px] w-5 bg-orange" />
+              <span className="h-[5px] w-5 bg-cyan" />
             </div>
           </div>
 
           <Link
             to="/contact"
             onClick={onNavigate}
-            className="group flex items-center gap-2 text-[11px] font-semibold text-text-primary transition-colors duration-100 hover:text-primary-blue"
+            className="group flex items-center gap-2 text-[11px] font-semibold text-text-primary transition-colors duration-100 hover:text-accent"
           >
             Have something in mind?
 
@@ -264,10 +262,10 @@ const ServiceItem = ({
       onClick={onNavigate}
       style={{
         transitionDelay: open
-          ? `${index * 15}ms`
+          ? `${index * 12}ms`
           : "0ms",
       }}
-      className={`group relative min-h-[114px] overflow-hidden border-b border-r border-black/[0.07] transition-all duration-100 ease-out ${
+      className={`group relative min-h-[114px] overflow-hidden border-b border-r border-border-light transition-[opacity,transform] duration-100 ease-out ${
         open
           ? "translate-y-0 opacity-100"
           : "translate-y-[3px] opacity-0"
@@ -275,28 +273,19 @@ const ServiceItem = ({
     >
       {/* HOVER BACKGROUND */}
       <div
-        className="absolute inset-0 opacity-0 transition-opacity duration-100 group-hover:opacity-100"
-        style={{
-          backgroundColor: service.soft,
-        }}
+        className={`absolute inset-0 opacity-0 transition-opacity duration-100 group-hover:opacity-100 ${service.softClass}`}
       />
 
-      {/* LEFT BORDER (1px inside the card) */}
+      {/* LEFT ACCENT */}
       <div
-        className="absolute bottom-0 left-0 top-0 w-[1px] origin-bottom scale-y-0 transition-transform duration-150 ease-out group-hover:scale-y-100"
-        style={{
-          backgroundColor: service.accent,
-        }}
+        className={`absolute bottom-0 left-0 top-0 w-px origin-bottom scale-y-0 transition-transform duration-150 group-hover:scale-y-100 ${service.accentClass}`}
       />
 
       <div className="relative flex h-full gap-4 px-5 py-5">
         {/* NUMBER */}
         <div className="flex flex-col items-center gap-2">
           <span
-            className="h-[7px] w-[7px]"
-            style={{
-              backgroundColor: service.accent,
-            }}
+            className={`h-[7px] w-[7px] ${service.accentClass}`}
           />
 
           <span className="text-[9px] font-semibold text-text-muted">
@@ -304,14 +293,9 @@ const ServiceItem = ({
           </span>
         </div>
 
-        {/* TEXT */}
+        {/* CONTENT */}
         <div className="flex-1">
-          <h3
-            className="max-w-[230px] text-[16px] font-semibold leading-[1.15] tracking-[-0.025em] text-text-primary transition-colors duration-100"
-            style={{
-              "--service-accent": service.accent,
-            }}
-          >
+          <h3 className="max-w-[230px] text-[16px] font-semibold leading-[1.15] tracking-[-0.025em] text-text-primary">
             {service.title}
           </h3>
 
@@ -321,19 +305,13 @@ const ServiceItem = ({
         </div>
 
         <FiArrowUpRight
-          className="mt-[2px] -translate-x-[2px] translate-y-[2px] text-[16px] opacity-0 transition-all duration-100 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100"
-          style={{
-            color: service.accent,
-          }}
+          className={`mt-[2px] -translate-x-[2px] translate-y-[2px] text-[16px] opacity-0 transition-all duration-100 group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100 ${service.textClass}`}
         />
       </div>
 
-      {/* BOTTOM BORDER (1px inside the card) */}
+      {/* BOTTOM ACCENT */}
       <div
-        className="absolute bottom-0 left-0 h-[1px] w-full origin-left scale-x-0 transition-transform duration-150 group-hover:scale-x-100"
-        style={{
-          backgroundColor: service.accent,
-        }}
+        className={`absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 transition-transform duration-150 group-hover:scale-x-100 ${service.accentClass}`}
       />
     </Link>
   );

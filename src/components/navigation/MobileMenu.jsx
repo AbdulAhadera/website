@@ -15,34 +15,49 @@ import professionalServicesImage from "../../assets/industries/professional-serv
 import manufacturingImage from "../../assets/industries/manufacturing.png";
 import realEstateImage from "../../assets/industries/real-estate.png";
 
-const serviceColors = {
+import { Button } from "../common/Button.jsx";
+
+const serviceStyles = {
   "website-design-development": {
-    accent: "#0066FF",
-    soft: "#EEF5FF",
+    accentClass: "bg-accent",
+    textClass: "text-accent",
+    softClass: "bg-accent-soft",
   },
+
   "branding-creative-design": {
-    accent: "#7C3AED",
-    soft: "#F5F0FF",
+    accentClass: "bg-purple",
+    textClass: "text-purple",
+    softClass: "bg-purple-soft",
   },
+
   "digital-marketing-growth": {
-    accent: "#16A34A",
-    soft: "#EFFBF3",
+    accentClass: "bg-green",
+    textClass: "text-green",
+    softClass: "bg-green-soft",
   },
+
   "social-media-management": {
-    accent: "#EC4899",
-    soft: "#FFF1F7",
+    accentClass: "bg-pink",
+    textClass: "text-pink",
+    softClass: "bg-pink-soft",
   },
+
   "ecommerce-solutions": {
-    accent: "#F97316",
-    soft: "#FFF5EC",
+    accentClass: "bg-orange",
+    textClass: "text-orange",
+    softClass: "bg-orange-soft",
   },
+
   "software-app-development": {
-    accent: "#0891B2",
-    soft: "#ECFBFF",
+    accentClass: "bg-cyan",
+    textClass: "text-cyan",
+    softClass: "bg-cyan-soft",
   },
+
   "ai-automation-solutions": {
-    accent: "#A855F7",
-    soft: "#F7F0FF",
+    accentClass: "bg-purple",
+    textClass: "text-purple",
+    softClass: "bg-purple-soft",
   },
 };
 
@@ -91,7 +106,10 @@ const mobileIndustries = [
   },
 ];
 
-const MobileMenu = ({ open, onClose }) => {
+const MobileMenu = ({
+  open,
+  onClose,
+}) => {
   const location = useLocation();
 
   const [activeAccordion, setActiveAccordion] = useState(null);
@@ -101,7 +119,9 @@ const MobileMenu = ({ open, onClose }) => {
 
   const handleAccordion = (name) => {
     setActiveAccordion((current) =>
-      current === name ? null : name,
+      current === name
+        ? null
+        : name,
     );
   };
 
@@ -113,7 +133,18 @@ const MobileMenu = ({ open, onClose }) => {
     }
   };
 
-  const handleTransitionEnd = () => {
+  /*
+   * Reset accordion after the actual mobile menu
+   * finishes closing.
+   *
+   * target/currentTarget check prevents child transitions
+   * from triggering this.
+   */
+  const handleTransitionEnd = (event) => {
+    if (event.target !== event.currentTarget) {
+      return;
+    }
+
     if (!open && activeAccordion !== null) {
       setActiveAccordion(null);
     }
@@ -126,7 +157,7 @@ const MobileMenu = ({ open, onClose }) => {
   return (
     <div
       onTransitionEnd={handleTransitionEnd}
-      className={`fixed inset-x-0 bottom-0 top-[72px] z-[90] bg-white transition-[opacity,transform,visibility] duration-150 ease-out xl:hidden ${
+      className={`fixed inset-x-0 bottom-0 top-[72px] z-[90] bg-surface transition-[opacity,transform,visibility] duration-150 ease-out xl:hidden ${
         open
           ? "visible translate-y-0 opacity-100"
           : "invisible -translate-y-[4px] opacity-0"
@@ -135,16 +166,17 @@ const MobileMenu = ({ open, onClose }) => {
       <div className="h-full overflow-y-auto overscroll-contain">
         <div className="px-4 pb-7 pt-2 sm:px-5">
           {/* SERVICES */}
-          <div className="border-t border-black/[0.08]">
+          <div className="border-t border-border-light">
             <button
               type="button"
               onClick={() => handleAccordion("services")}
               className="flex w-full items-center justify-between py-3.5"
+              aria-expanded={servicesOpen}
             >
               <span
                 className={`text-[17px] font-semibold tracking-[-0.03em] transition-colors duration-150 ${
                   servicesOpen
-                    ? "text-primary-blue"
+                    ? "text-accent"
                     : "text-text-primary"
                 }`}
               >
@@ -154,12 +186,13 @@ const MobileMenu = ({ open, onClose }) => {
               <FiChevronDown
                 className={`text-[16px] transition-all duration-150 ${
                   servicesOpen
-                    ? "rotate-180 text-primary-blue"
+                    ? "rotate-180 text-accent"
                     : "text-text-muted"
                 }`}
               />
             </button>
 
+            {/* SERVICES ACCORDION */}
             <div
               className={`grid transition-[grid-template-rows,opacity] duration-150 ease-out ${
                 servicesOpen
@@ -170,9 +203,9 @@ const MobileMenu = ({ open, onClose }) => {
               <div className="overflow-hidden">
                 <div className="grid grid-cols-2 gap-1 pb-3">
                   {servicesData.map((service, index) => {
-                    const colors =
-                      serviceColors[service.id] ||
-                      serviceColors["website-design-development"];
+                    const styles =
+                      serviceStyles[service.id] ||
+                      serviceStyles["website-design-development"];
 
                     return (
                       <Link
@@ -180,12 +213,11 @@ const MobileMenu = ({ open, onClose }) => {
                         to={`/services/${service.slug}`}
                         onClick={handleNavigate}
                         style={{
-                          backgroundColor: colors.soft,
                           transitionDelay: servicesOpen
                             ? `${index * 10}ms`
                             : "0ms",
                         }}
-                        className={`group relative flex min-h-[62px] flex-col justify-between overflow-hidden p-3 transition-[opacity,transform] duration-150 ease-out ${
+                        className={`group relative flex min-h-[62px] flex-col justify-between overflow-hidden p-3 transition-[opacity,transform] duration-150 ease-out ${styles.softClass} ${
                           servicesOpen
                             ? "translate-y-0 opacity-100"
                             : "translate-y-[3px] opacity-0"
@@ -193,17 +225,11 @@ const MobileMenu = ({ open, onClose }) => {
                       >
                         <div className="flex items-center justify-between">
                           <span
-                            className="h-[5px] w-5"
-                            style={{
-                              backgroundColor: colors.accent,
-                            }}
+                            className={`h-[5px] w-5 ${styles.accentClass}`}
                           />
 
                           <span className="text-[8px] font-semibold text-text-muted">
-                            {String(index + 1).padStart(
-                              2,
-                              "0",
-                            )}
+                            {String(index + 1).padStart(2, "0")}
                           </span>
                         </div>
 
@@ -213,19 +239,9 @@ const MobileMenu = ({ open, onClose }) => {
                           </h3>
 
                           <FiArrowUpRight
-                            className="shrink-0 text-[13px]"
-                            style={{
-                              color: colors.accent,
-                            }}
+                            className={`shrink-0 text-[13px] ${styles.textClass}`}
                           />
                         </div>
-
-                        <span
-                          className="absolute bottom-0 left-0 h-[2px] w-full origin-left scale-x-0 transition-transform duration-150 group-active:scale-x-100"
-                          style={{
-                            backgroundColor: colors.accent,
-                          }}
-                        />
                       </Link>
                     );
                   })}
@@ -234,29 +250,30 @@ const MobileMenu = ({ open, onClose }) => {
                 <Link
                   to="/services"
                   onClick={handleNavigate}
-                  className="mb-3 flex h-[42px] items-center justify-between border border-black/[0.08] px-3"
+                  className="mb-3 flex h-[42px] items-center justify-between border border-border-light px-3 transition-colors duration-150 hover:bg-bg-2"
                 >
                   <span className="text-[11px] font-semibold text-text-primary">
                     All Services
                   </span>
 
-                  <FiArrowRight className="text-[14px] text-primary-blue" />
+                  <FiArrowRight className="text-[14px] text-accent" />
                 </Link>
               </div>
             </div>
           </div>
 
           {/* INDUSTRIES */}
-          <div className="border-t border-black/[0.08]">
+          <div className="border-t border-border-light">
             <button
               type="button"
               onClick={() => handleAccordion("industries")}
               className="flex w-full items-center justify-between py-3.5"
+              aria-expanded={industriesOpen}
             >
               <span
                 className={`text-[17px] font-semibold tracking-[-0.03em] transition-colors duration-150 ${
                   industriesOpen
-                    ? "text-primary-blue"
+                    ? "text-accent"
                     : "text-text-primary"
                 }`}
               >
@@ -266,12 +283,13 @@ const MobileMenu = ({ open, onClose }) => {
               <FiChevronDown
                 className={`text-[16px] transition-all duration-150 ${
                   industriesOpen
-                    ? "rotate-180 text-primary-blue"
+                    ? "rotate-180 text-accent"
                     : "text-text-muted"
                 }`}
               />
             </button>
 
+            {/* INDUSTRIES ACCORDION */}
             <div
               className={`grid transition-[grid-template-rows,opacity] duration-150 ease-out ${
                 industriesOpen
@@ -281,33 +299,31 @@ const MobileMenu = ({ open, onClose }) => {
             >
               <div className="overflow-hidden">
                 <div className="grid grid-cols-2 gap-1 pb-3">
-                  {mobileIndustries.map(
-                    (industry, index) => (
-                      <IndustryItem
-                        key={industry.id}
-                        industry={industry}
-                        index={index}
-                        open={industriesOpen}
-                        onNavigate={handleNavigate}
-                      />
-                    ),
-                  )}
+                  {mobileIndustries.map((industry, index) => (
+                    <IndustryItem
+                      key={industry.id}
+                      industry={industry}
+                      index={index}
+                      open={industriesOpen}
+                      onNavigate={handleNavigate}
+                    />
+                  ))}
 
                   {/* ALL INDUSTRIES */}
                   <Link
                     to="/industries"
                     onClick={handleNavigate}
-                    className={`relative flex h-[76px] flex-col justify-between overflow-hidden bg-[#f2f3f5] p-3 transition-[opacity,transform] duration-150 ${
+                    className={`relative flex h-[76px] flex-col justify-between overflow-hidden bg-bg-3 p-3 transition-[opacity,transform,background-color] duration-150 ${
                       industriesOpen
                         ? "translate-y-0 opacity-100"
                         : "translate-y-[3px] opacity-0"
                     }`}
                   >
                     <div className="flex gap-[2px]">
-                      <span className="h-[4px] w-3 bg-[#0066FF]" />
-                      <span className="h-[4px] w-3 bg-[#7C3AED]" />
-                      <span className="h-[4px] w-3 bg-[#16A34A]" />
-                      <span className="h-[4px] w-3 bg-[#F97316]" />
+                      <span className="h-[4px] w-3 bg-accent" />
+                      <span className="h-[4px] w-3 bg-purple" />
+                      <span className="h-[4px] w-3 bg-green" />
+                      <span className="h-[4px] w-3 bg-orange" />
                     </div>
 
                     <div className="flex items-end justify-between gap-2">
@@ -324,7 +340,7 @@ const MobileMenu = ({ open, onClose }) => {
           </div>
 
           {/* MAIN LINKS */}
-          <div className="border-t border-black/[0.08]">
+          <div className="border-t border-border-light">
             <MobileLink
               label="Work"
               href="/work"
@@ -348,38 +364,17 @@ const MobileMenu = ({ open, onClose }) => {
           </div>
 
           {/* CTA */}
-          <Link
-            to="/contact"
+          <div
             onClick={handleNavigate}
-            className="relative mt-4 flex h-[52px] items-center justify-between overflow-hidden bg-[#07111f] px-4"
+            className="mt-4"
           >
-            <div className="absolute -bottom-10 -left-5 h-20 w-20 bg-[#0066FF]/25 blur-[30px]" />
-
-            <div className="absolute -right-5 -top-9 h-20 w-20 bg-[#7C3AED]/20 blur-[30px]" />
-
-            <div className="relative">
-              <span className="block text-[8px] font-medium uppercase tracking-[0.15em] text-white/40">
-                Have a project?
-              </span>
-
-              <span className="mt-[2px] block text-[14px] font-semibold text-white">
-                Start a Project
-              </span>
-            </div>
-
-            <div className="relative flex h-8 w-8 items-center justify-center bg-white">
-              <FiArrowUpRight className="text-[14px] text-text-primary" />
-            </div>
-
-            <div className="absolute bottom-0 left-0 flex h-[2px] w-full">
-              <span className="flex-1 bg-[#0066FF]" />
-              <span className="flex-1 bg-[#7C3AED]" />
-              <span className="flex-1 bg-[#16A34A]" />
-              <span className="flex-1 bg-[#EC4899]" />
-              <span className="flex-1 bg-[#F97316]" />
-              <span className="flex-1 bg-[#0891B2]" />
-            </div>
-          </Link>
+            <Button
+              to="/contact"
+              className="w-full"
+            >
+              Start a Project
+            </Button>
+          </div>
         </div>
       </div>
     </div>
@@ -401,7 +396,7 @@ const IndustryItem = ({
           ? `${index * 10}ms`
           : "0ms",
       }}
-      className={`group relative h-[76px] overflow-hidden bg-[#07111f] transition-[opacity,transform] duration-150 ease-out ${
+      className={`group relative h-[76px] overflow-hidden bg-bg-dark transition-[opacity,transform] duration-150 ease-out ${
         open
           ? "translate-y-0 opacity-100"
           : "translate-y-[3px] opacity-0"
@@ -416,14 +411,15 @@ const IndustryItem = ({
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/35 to-black/10" />
 
       <div className="absolute inset-x-0 bottom-0 flex items-end justify-between gap-2 p-2.5">
-        <h3 className="max-w-[118px] text-[11px] font-semibold leading-[1.05] tracking-[-0.02em] text-white sm:text-[12px]">
+        <h3 className="max-w-[118px] text-[11px] font-semibold leading-[1.05] tracking-[-0.02em] text-text-inverse sm:text-[12px]">
           {industry.title}
-          <span className="ml-1 text-primary-blue">
+
+          <span className="ml-1 text-accent">
             _
           </span>
         </h3>
 
-        <FiArrowUpRight className="shrink-0 text-[13px] text-white" />
+        <FiArrowUpRight className="shrink-0 text-[13px] text-text-inverse" />
       </div>
     </Link>
   );
@@ -439,12 +435,12 @@ const MobileLink = ({
     <Link
       to={href}
       onClick={onClick}
-      className="flex h-[48px] items-center justify-between border-b border-black/[0.08]"
+      className="flex h-[48px] items-center justify-between border-b border-border-light"
     >
       <span
         className={`text-[17px] font-semibold tracking-[-0.03em] transition-colors duration-150 ${
           active
-            ? "text-primary-blue"
+            ? "text-accent"
             : "text-text-primary"
         }`}
       >
@@ -454,7 +450,7 @@ const MobileLink = ({
       <FiArrowUpRight
         className={`text-[15px] ${
           active
-            ? "text-primary-blue"
+            ? "text-accent"
             : "text-text-muted"
         }`}
       />
