@@ -168,10 +168,7 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center px-5 py-8 md:px-8 lg:px-12">
-            <Button
-              to="/contact"
-              className="min-w-[190px]"
-            >
+            <Button to="/contact" className="min-w-[190px]">
               Start a Project
             </Button>
           </div>
@@ -182,15 +179,13 @@ const Footer = () => {
           {/* BRAND */}
           <div className="flex flex-col justify-between border-b border-text-inverse/[0.08] px-5 py-8 md:px-8 md:py-10 lg:min-h-[390px] lg:border-b-0 lg:border-r">
             <div>
-              <Link
-                to="/"
-                className="inline-flex items-center"
-              >
+              <Link to="/" className="inline-flex items-center">
                 <img
                   src={IconWhite}
                   alt="Zapmind"
                   className="h-[38px] w-auto object-contain"
                 />
+                apmind AI
               </Link>
 
               <p className="mt-6 max-w-[340px] text-[13px] leading-6 text-text-inverse/50">
@@ -231,9 +226,7 @@ const Footer = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3">
             {/* SERVICES */}
             <div className="border-b border-text-inverse/[0.08] px-5 py-8 md:px-7 lg:border-b-0 lg:border-r">
-              <FooterTitle number="01">
-                Services
-              </FooterTitle>
+              <FooterTitle number="01">Services</FooterTitle>
 
               <div className="mt-6 space-y-3.5">
                 {serviceLinks.map((link) => (
@@ -254,16 +247,11 @@ const Footer = () => {
 
             {/* INDUSTRIES */}
             <div className="border-b border-text-inverse/[0.08] px-5 py-8 md:px-7 sm:border-l sm:border-text-inverse/[0.08] lg:border-b-0 lg:border-l-0 lg:border-r">
-              <FooterTitle number="02">
-                Industries
-              </FooterTitle>
+              <FooterTitle number="02">Industries</FooterTitle>
 
               <div className="mt-6 space-y-3.5">
                 {industryLinks.map((link) => (
-                  <FooterLink
-                    key={link.href}
-                    href={link.href}
-                  >
+                  <FooterLink key={link.href} href={link.href}>
                     {link.label}
                   </FooterLink>
                 ))}
@@ -273,7 +261,6 @@ const Footer = () => {
                   className="group mt-5 flex items-center gap-2 text-[11px] font-semibold text-text-inverse"
                 >
                   All Industries
-
                   <FiArrowUpRight className="text-[13px] transition-transform duration-150 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
                 </Link>
               </div>
@@ -281,16 +268,11 @@ const Footer = () => {
 
             {/* COMPANY */}
             <div className="px-5 py-8 md:px-7 sm:col-span-2 lg:col-span-1">
-              <FooterTitle number="03">
-                Company
-              </FooterTitle>
+              <FooterTitle number="03">Company</FooterTitle>
 
               <div className="mt-6 space-y-3.5">
                 {companyLinks.map((link) => (
-                  <FooterLink
-                    key={link.href}
-                    href={link.href}
-                  >
+                  <FooterLink key={link.href} href={link.href}>
                     {link.label}
                   </FooterLink>
                 ))}
@@ -306,7 +288,6 @@ const Footer = () => {
                   className="group mt-3 flex items-center justify-between gap-4 text-[12px] font-semibold text-text-inverse"
                 >
                   Start a conversation
-
                   <FiArrowUpRight className="transition-transform duration-150 group-hover:translate-x-[2px] group-hover:-translate-y-[2px]" />
                 </Link>
               </div>
@@ -317,9 +298,7 @@ const Footer = () => {
         {/* BOTTOM */}
         <div className="flex flex-col gap-4 border-x border-t border-text-inverse/[0.08] px-5 py-5 md:flex-row md:items-center md:justify-between md:px-8">
           <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[10px] text-text-inverse/30">
-            <span>
-              © {currentYear} Zapmind.ai
-            </span>
+            <span>© {currentYear} Zapmind.ai</span>
 
             {legalLinks.map((link) => (
               <Link
@@ -350,10 +329,7 @@ const Footer = () => {
   );
 };
 
-const FooterTitle = ({
-  number,
-  children,
-}) => {
+const FooterTitle = ({ number, children }) => {
   return (
     <div className="flex items-center gap-3">
       <span className="text-[9px] font-semibold text-text-inverse/25">
@@ -367,10 +343,7 @@ const FooterTitle = ({
   );
 };
 
-const FooterLink = ({
-  href,
-  children,
-}) => {
+const FooterLink = ({ href, children }) => {
   return (
     <Link
       to={href}
