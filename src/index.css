@@ -2,15 +2,33 @@
 @import "tailwindcss";
 
 @theme {
+  /* =========================
+     BACKGROUNDS
+  ========================= */
   --color-bg-1: #ffffff;
   --color-bg-2: #f8faff;
   --color-bg-3: #f1f6ff;
   --color-bg-dark: #07111f;
-  --color-surface: #ffffff;
 
+  /* =========================
+     SURFACES
+  ========================= */
+  --color-surface: #ffffff;
+  --color-surface-dark: #0a1728;
+  --color-surface-dark-2: #0b192b;
+  --color-surface-dark-3: #102540;
+
+  /* =========================
+     BORDERS
+  ========================= */
   --color-border-light: #edf2fb;
   --color-border-strong: #dbe6f7;
+  --color-border-dark: #1d2a3d;
+  --color-border-dark-strong: #29384d;
 
+  /* =========================
+     TEXT
+  ========================= */
   --color-text-primary: #07111f;
   --color-text-secondary: #334155;
   --color-text-body: #1e293b;
@@ -18,6 +36,9 @@
   --color-text-muted: #94a3b8;
   --color-text-inverse: #ffffff;
 
+  /* =========================
+     PRIMARY / BLUE
+  ========================= */
   --color-accent: #0066ff;
   --color-accent-hover: #0052cc;
   --color-accent-active: #003fa6;
@@ -26,47 +47,78 @@
   --color-accent-contrast: #ffffff;
   --color-electric: #2f80ff;
 
+  /* =========================
+     NAVY
+  ========================= */
   --color-navy: #07111f;
   --color-navy-light: #101d30;
   --color-navy-soft: #17263c;
 
+  /* =========================
+     GREEN
+  ========================= */
   --color-green: #10b981;
   --color-green-hover: #059669;
   --color-green-soft: #ecfdf5;
   --color-green-strong: #047857;
 
+  /* =========================
+     PURPLE
+  ========================= */
   --color-purple: #7c3aed;
   --color-purple-hover: #6d28d9;
   --color-purple-soft: #f3e8ff;
   --color-purple-strong: #5b21b6;
 
+  /* =========================
+     ORANGE
+  ========================= */
   --color-orange: #f97316;
   --color-orange-hover: #ea580c;
   --color-orange-soft: #fff3e8;
   --color-orange-strong: #c2410c;
 
+  /* =========================
+     PINK
+  ========================= */
   --color-pink: #ec4899;
   --color-pink-hover: #db2777;
   --color-pink-soft: #fdf2f8;
   --color-pink-strong: #be185d;
 
+  /* =========================
+     YELLOW
+  ========================= */
   --color-yellow: #f4b400;
   --color-yellow-hover: #d99b00;
   --color-yellow-soft: #fff8db;
   --color-yellow-strong: #a16207;
 
+  /* =========================
+     CYAN
+  ========================= */
   --color-cyan: #06b6d4;
   --color-cyan-hover: #0891b2;
   --color-cyan-soft: #ecfeff;
   --color-cyan-strong: #0e7490;
 
+  /* =========================
+     RED
+  ========================= */
   --color-red: #ef4444;
   --color-red-hover: #dc2626;
   --color-red-soft: #fef2f2;
   --color-red-strong: #b91c1c;
 
+  /* =========================
+     FONT
+  ========================= */
   --font-sans: "Manrope", sans-serif;
 }
+
+/* =========================
+   ROOT
+========================= */
 
 html {
   scroll-behavior: smooth;
@@ -83,6 +135,10 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
 }
 
 * {
@@ -113,18 +169,26 @@ textarea,
 select {
   font: inherit;
   transition:
-    color 200ms ease,
-    background-color 200ms ease,
-    border-color 200ms ease,
-    opacity 200ms ease,
-    box-shadow 200ms ease,
-    transform 200ms ease;
+    color 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease,
+    opacity 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
 }
 
 button,
 a {
   cursor: pointer;
 }
+
+button {
+  border: 0;
+}
+
+/* =========================
+   PARALLAX
+========================= */
 
 .parallax-layer {
   will-change: transform;
@@ -143,6 +207,10 @@ a {
   will-change: transform;
 }
 
+/* =========================
+   GRADIENT TEXT
+========================= */
+
 .text-gradient {
   background: linear-gradient(
     90deg,
@@ -154,6 +222,10 @@ a {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* =========================
+   SOFT BACKGROUNDS
+========================= */
 
 .bg-accent-soft {
   background: var(--color-accent-soft);
@@ -187,6 +259,10 @@ a {
   background: var(--color-red-soft);
 }
 
+/* =========================
+   COLOR TEXT HELPERS
+========================= */
+
 .text-accent {
   color: var(--color-accent);
 }
@@ -219,6 +295,56 @@ a {
   color: var(--color-red);
 }
 
+/* =========================
+   GRID BACKGROUNDS
+========================= */
+
+.grid-light {
+  background-image:
+    linear-gradient(
+      rgba(7, 17, 31, 0.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(7, 17, 31, 0.055) 1px,
+      transparent 1px
+    );
+  background-size: 42px 42px;
+}
+
+.grid-dark {
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.055) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.055) 1px,
+      transparent 1px
+    );
+  background-size: 42px 42px;
+}
+
+.grid-dark-small {
+  background-image:
+    linear-gradient(
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.05) 1px,
+      transparent 1px
+    );
+  background-size: 30px 30px;
+}
+
+/* =========================
+   MARQUEE
+========================= */
+
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -232,6 +358,10 @@ a {
 .animate-marquee {
   animation: marquee 22s linear infinite;
 }
+
+/* =========================
+   DELIVERABLES
+========================= */
 
 @keyframes deliverableNumber {
   0% {
@@ -348,6 +478,10 @@ a {
   animation: deliverablesMarquee 28s linear infinite;
 }
 
+/* =========================
+   HOME HERO
+========================= */
+
 @keyframes homeHeroImage {
   0%,
   100% {
@@ -362,6 +496,10 @@ a {
 .home-hero-image {
   animation: homeHeroImage 16s ease-in-out infinite;
 }
+
+/* =========================
+   COLOR EGGS
+========================= */
 
 .color-eggs {
   position: relative;
@@ -439,6 +577,10 @@ a {
   }
 }
 
+/* =========================
+   RESPONSIVE
+========================= */
+
 @media (max-width: 768px) {
   .parallax-layer,
   .parallax-slow,
@@ -447,6 +589,10 @@ a {
     transform: none !important;
   }
 }
+
+/* =========================
+   REDUCED MOTION
+========================= */
 
 @media (prefers-reduced-motion: reduce) {
   html {
