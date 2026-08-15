@@ -1,4 +1,4 @@
-import { HashRouter } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 
 import { Router } from "./routes.jsx";
 
@@ -7,7 +7,7 @@ import { Footer } from "./components/layout/Footer.jsx";
 
 const App = () => {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <div className="min-h-screen">
         <Navbar />
 
@@ -17,8 +17,8 @@ const App = () => {
 
         <Footer />
       </div>
-    </HashRouter>
+    </BrowserRouter>
   );
 };
 
-export default  App ;
+export default App;

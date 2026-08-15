@@ -8,8 +8,6 @@ import {
 
 import IconWhite from "../../assets/IconWhite.png";
 
-import { Button } from "../common/Button.jsx";
-
 const SOCIALS = [
   {
     icon: FiFacebook,
@@ -168,9 +166,7 @@ const Footer = () => {
           </div>
 
           <div className="flex items-center px-5 py-8 md:px-8 lg:px-12">
-            <Button to="/contact" className="min-w-[190px]">
-              Start a Project
-            </Button>
+            
           </div>
         </div>
 
