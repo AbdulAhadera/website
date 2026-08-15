@@ -341,12 +341,7 @@ const MobileMenu = ({
 
           {/* MAIN LINKS */}
           <div className="border-t border-border-light">
-            <MobileLink
-              label="Work"
-              href="/work"
-              active={isActive("/work")}
-              onClick={handleNavigate}
-            />
+         
 
             <MobileLink
               label="About"

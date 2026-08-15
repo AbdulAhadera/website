@@ -169,18 +169,7 @@ const Navbar = () => {
               </button>
             </div>
 
-            {/* WORK */}
-            <Link
-              to="/work"
-              onClick={handleCloseAll}
-              className={`flex h-full items-center px-5 text-[14px] font-semibold transition-colors duration-100 ${
-                isActive("/work")
-                  ? "text-accent"
-                  : "text-text-primary hover:text-accent"
-              }`}
-            >
-              Work
-            </Link>
+         
 
             {/* ABOUT */}
             <Link
